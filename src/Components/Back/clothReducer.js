@@ -5,16 +5,16 @@ function clothReducer(state, action) {
     case 'cloth_list':
       newState = action.payload.map((k, i) => ({ ...k, row: i }));
       break;
-    case 'sort_price_asc':
+    case 'price_asc':
       newState = [...state].sort((a, b) => a.price - b.price);
       break;
-    case 'sort_price_desc':
+    case 'price_desc':
       newState = [...state].sort((a, b) => b.price - a.price);
       break;
     case 'default':
       newState = [...state].sort((a, b) => a.id - b.id);
       break;
-    case 'sort_date_asc':
+    case 'date_asc':
       newState = [...state].sort((x, y) => {
         let a = new Date(x.date);
         let b = new Date(y.date);

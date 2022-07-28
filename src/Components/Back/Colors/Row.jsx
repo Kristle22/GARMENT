@@ -2,39 +2,36 @@ import { useContext } from 'react';
 import BackContext from '../BackContext';
 
 function Row({ row }) {
-  const { setDeleteSomeSecond } = useContext(BackContext);
+
+  const { setDeleteClothColor } = useContext(BackContext);
 
   const handleDelete = () => {
-    setDeleteSomeSecond(row);
+    setDeleteClothColor(row);
   };
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div
+      <div className='flex-row'>
+        <p
           className='colors'
           style={{
-            backgroundColor: row.title,
-            color: row.title === 'white' ? 'black' : 'white',
+            backgroundColor: row.hex_code,
+            color: row.hex_code === 'white' ? 'black' : 'white',
             boxShadow: `2px 3px 20px ${row.title} `,
+            margin: '10px',
           }}
         >
           {row.title}
-        </div>
-      </div>
-      {row.id === row.garment_id ? (
-        ''
-      ) : (
-        <div
-          className='btns'
-          style={{ width: '12%', alignItems: 'end', paddingRight: '10px' }}
-        >
+        </p>
+        {row.id === row.garment_id ? (
+          ''
+        ) : (
           <button type='button' className='dlt' onClick={handleDelete}>
             <svg>
               <use href='#Delete' />
             </svg>
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }

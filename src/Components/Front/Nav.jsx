@@ -4,7 +4,10 @@ import FrontContext from './FrontContext';
 import Message from './Message';
 
 function Nav() {
-  const { getUser } = useContext(FrontContext);
+  const { getUser, clothes } = useContext(FrontContext);
+
+  const countInCart = clothes.map(cl => cl.inCart).reduce((acc, total) => acc + total, 0);
+
   return (
     <>
       <nav className='nav'>
@@ -15,31 +18,26 @@ function Nav() {
         >
           Welcome, {getUser()}
         </NavLink>
+        <NavLink
+          to='/orders-history'
+          className='nav-link'
+          style={({ isActive }) => (isActive ? { color: 'crimson' } : null)}
+        >Orders History</NavLink>
         <Link
           to='/logout'
-          style={{ width: '14%', textDecoration: 'underline' }}
-        >
+          className='logout'>
           Logout
         </Link>
         <NavLink
-          to='/myaccount'
+          to='/my-cart'
           className='nav-link'
           style={({ isActive }) => (isActive ? { color: 'crimson' } : null)}
         >
-          <div style={{ position: 'relative' }}>
-            <span
-              style={{
-                position: 'absolute',
-                top: '-15px',
-                right: '-5px',
-                fontSize: '25px',
-                fontFamily: 'cursive',
-                color: 'crimson',
-              }}
-            >
-              3
+          <div className='inCart'>
+            <span>
+              {countInCart && countInCart}
             </span>
-            <svg className='edt cart'>
+            <svg className='edt nav-cart'>
               <use href='#Shopping-cart' />
             </svg>
           </div>

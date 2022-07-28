@@ -1,32 +1,18 @@
 import { useContext } from 'react';
 import FrontContext from '../FrontContext';
-// import OrderCreate from './OrderCreate';
 
 function Row({ row }) {
   const {
     setInCart,
-    // setCreateComment,
-    // setCreateRates,
   } = useContext(FrontContext);
 
-  // const [comment, setComment] = useState('');
-  // const [rate, setRate] = useState('5');
-
-  // const handleComment = () => {
-  //   setCreateComment({
-  //     comment,
-  //     id: row.id,
-  //   });
-  //   setComment('');
-  // };
-  // const rateNow = (e) => {
-  //   setRate(e.target.value);
-  //   setCreateRates({ rate: parseInt(e.target.value), id: row.id });
-  // };
+  const addToCart = () => {
+    setInCart({ id: row.id, inCart: 1 });
+  };
 
   return (
     <>
-      <div className='flex-row user frame'>
+      <div className='flex-row user-4 frame'>
         <div>
           <img
             className='img-box'
@@ -45,15 +31,11 @@ function Row({ row }) {
           ></span>
           {row.clothColor}
         </p>
-        <p>{row.type}</p>
+        <p className='heading'>{row.type}</p>
         <p className='prc'>{Number(row.price).toFixed(2)} Eur.</p>
       </div>
       <div className='btns'>
-        <button
-          type='button'
-          className='put'
-          onClick={() => setInCart({ id: row.id })}
-        >
+        <button type='button' className='put' onClick={addToCart}>
           <svg>
             <use href='#cart' />
           </svg>

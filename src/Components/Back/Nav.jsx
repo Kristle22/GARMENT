@@ -20,6 +20,13 @@ function Nav() {
           Garments
         </NavLink>
         <NavLink
+          to='/admin/colors'
+          className='nav-link'
+          style={({ isActive }) => (isActive ? { color: 'crimson' } : null)}
+        >
+          Colors
+        </NavLink>
+        <NavLink
           to='/admin/orders'
           className='nav-link'
           style={({ isActive }) => (isActive ? { color: 'crimson' } : null)}
@@ -35,8 +42,7 @@ function Nav() {
         </NavLink> */}
         <Link
           to='/logout'
-          style={{ width: '14%', textDecoration: 'underline' }}
-        >
+          className='logout'>
           Logout
         </Link>
       </nav>

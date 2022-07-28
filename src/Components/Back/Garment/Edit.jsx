@@ -13,7 +13,7 @@ function Edit() {
     setDeletePhoto,
   } = useContext(BackContext);
 
-  const [color, setColor] = useState('0');
+  const [color, setColor] = useState(0);
   const [type, setType] = useState('');
   const [price, setPrice] = useState('');
 

@@ -12,7 +12,7 @@ function Row({ row }) {
 
   return (
     <>
-      <div className='flex-row main frame'>
+      <div className='main-5 frame'>
         <img
           src={row.photo ? row.photo : require('../../../img/noimg.png')}
           alt='some_outfit'

@@ -1,85 +1,63 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import FrontContext from '../FrontContext';
+import OrderModal from './OrderModal';
 
-function Create({ setSize, setUserCom }) {
+function OrderCreate() {
+
   const {
-    orderModal,
+    clothes,
     setOrderModal,
-    setOrderCreate,
-    showMessage,
-    users,
-    getUser,
   } = useContext(FrontContext);
 
-  useEffect(() => {
-    if (null === orderModal) {
-      return;
-    }
-  }, [orderModal]);
-  console.log(orderModal);
-  const handleReserve = () => {
-    // if (size === '') {
-    //   showMessage({
-    //     text: 'Prasau uzpildykite privalomus laukelius',
-    //     type: 'info',
-    //   });
-    //   return;
-    // }
-    const userId =
-      users.filter((user) => user.name === getUser())[0]?.id ?? null;
-    const data = {
-      items: orderModal.items,
-      size: orderModal.size,
-      userCom: orderModal.userCom,
-      userId,
-    };
-    setOrderCreate(data);
-    console.log('ORDER DATA', data);
-    setOrderModal(null);
-    setSize(0);
-    setUserCom('');
+  const clothIds = clothes.filter((cl) => cl.inCart === 1).map((cl) => cl.id);
+  const joinIds = clothes.filter((cl) => cl.inCart === 1).map((cl) => cl.id).join(', ');
+
+  const clothArr = clothes.filter((cl) => cl.inCart === 1);
+
+  // const clothInCart = Object.assign({}, ...clothArr);
+  // console.log('CIC', clothInCart);
+
+  const orderSum = clothes.filter(cl => cl.inCart === 1).reduce((acc, total) => acc + total.price, 0);
+
+  const handleModal = () => {
+    setOrderModal(clothArr);
   };
-  if (null === orderModal) {
-    return null;
-  }
+
 
   return (
     <>
-      <div className='modal-layer'>
-        <div className='modal-cont reg'>
-          <div className='modal reg'>
-            <button
-              type='button'
-              className='close-x reg'
-              onClick={() => setOrderModal(null)}
-            >
-              &times;
-            </button>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-                color: '#fff',
-              }}
-            >
-              <h4>ORDER DETAILS: {orderModal.price}</h4>
-            </div>
-            <button
-              type='button'
-              className='close reg'
-              onClick={() => setOrderModal(null)}
-            >
-              EXIT
-            </button>
-            <button type='button' className='put reg' onClick={handleReserve}>
-              CON-FIRM!
+      <h1 className='cart-heading'>Shopping Cart</h1>
+      <div className='flex center cartimg'>
+        <div className='flex-card cart' style={{ width: '70%' }}>
+          {clothes.map((cl) =>
+            cl.inCart === 1 ? (
+              <div className='flex-row frame'>
+                <img className='img-box' src={cl.photo} alt='new outfit' />
+                <p className='heading'>{cl.type}</p>
+                <i>{cl.clothColor}</i>
+                <p className='order'>{cl.price.toFixed(2)} Eur</p>
+              </div>
+            ) : null
+          )}
+          <div className='btns-modal'>
+            <h2 className='frame'>
+              Total price:{' '}
+              <b>
+                <u>{orderSum.toFixed(2)}</u> Eur.
+              </b>
+            </h2>
+            <button type='button' className='order' onClick={handleModal}>
+              Place your ORDER{' '}
+              <svg>
+                <use href='#Odered' />
+              </svg>
             </button>
           </div>
         </div>
+        <OrderModal orderSum={orderSum} joinIds={joinIds} clothIds={clothIds} clothArr={clothArr} />
       </div>
     </>
   );
 }
 
-export default Create;
+export default OrderCreate;

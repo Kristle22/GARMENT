@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import FrontContext from './FrontContext';
+import BackContext from './BackContext';
 
 function Search() {
-  const { setSearch } = useContext(FrontContext);
+  const { setSearch, search } = useContext(BackContext);
 
   const [s, setS] = useState('');
 
@@ -10,13 +10,12 @@ function Search() {
     setS(e.target.value);
     setSearch(e.target.value);
   };
-
   return (
     <>
       <div className='search' style={{ maxWidth: '210px' }}>
         <input
           type='text'
-          placeholder='Search by Type...'
+          placeholder='Type...'
           value={s}
           onChange={searching}
         />

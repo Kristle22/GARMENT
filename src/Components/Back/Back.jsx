@@ -21,7 +21,7 @@ function Back({ show }) {
   const [clothes, dispachClothes] = useReducer(clothReducer, []);
 
   const [clothColors, setClothColors] = useState(null);
-  // const [createClothColor, setCreateClothColor] = useState(null);
+  const [createClothColor, setCreateClothColor] = useState(null);
   // const [deleteClothColor, setDeleteClothColor] = useState(null);
 
   const [deletePhoto, setDeletePhoto] = useState(null);
@@ -30,19 +30,18 @@ function Back({ show }) {
   const [deleteOrder, setDeleteOrder] = useState(null);
   const [status, setStatus] = useState(0);
 
-  // const [sortPrice, setSortPrice] = useState('default');
-
+  const [sortPrice, setSortPrice] = useState('0');
   const [filter, setFilter] = useState(0);
   const [search, setSearch] = useState('');
 
-  // const sorting = (e) => {
-  //   const sortOrder = e.target.value;
-  //   setSortPrice(sortOrder);
-  //   const action = {
-  //     type: sortOrder,
-  //   };
-  //   dispachClothes(action);
-  // };
+  const sorting = (e) => {
+    const sortOrder = e.target.value;
+    setSortPrice(sortOrder);
+    const action = {
+      type: sortOrder,
+    };
+    dispachClothes(action);
+  };
 
   const showMessage = (mes) => {
     setMessage(mes);
@@ -115,13 +114,24 @@ function Back({ show }) {
       });
   }, [editData]);
 
-  // /////////////AXIOS Colors////////
-  // READ
+  // /////////////AXIOS Colors///////
+  // READ Colors
   useEffect(() => {
     axios.get('http://localhost:3003/spalvos', authConfig()).then((res) => {
       setClothColors(res.data);
     });
   }, [lastUpdate]);
+
+  // Create Colors
+  useEffect(() => {
+    if (null === createClothColor) return;
+    axios
+      .post('http://localhost:3003/spalvos', createClothColor, authConfig())
+      .then((res) => {
+        showMessage(res.data.msg);
+        setLastUpdate(Date.now());
+      });
+  }, [createClothColor]);
 
   // DELETE COMMENT
   const handleDeleteComment = (id) => {
@@ -179,14 +189,15 @@ function Back({ show }) {
         modalData,
         setModalData,
         setEditData,
-        // sortPrice,
-        // sorting,
+        sortPrice,
+        sorting,
         filter,
         setFilter,
         setSearch,
         message,
         clothColors,
         setClothColors,
+        setCreateClothColor,
         // setDeleteClothColor,
         handleDeleteComment,
         orders,
@@ -217,8 +228,8 @@ function Back({ show }) {
       ) : show === 'orders' ? (
         <OrdersCrud />
       ) : // ) : show === 'comments' ? (
-      // <CommentsCrud />
-      null}
+        // <CommentsCrud />
+        null}
     </BackContext.Provider>
   );
 }

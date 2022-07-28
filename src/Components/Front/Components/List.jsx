@@ -17,7 +17,7 @@ function List() {
           <SortBtns />
           <Search />
         </div>
-        <div className='flex-row user'>
+        <div className='flex-row user-4'>
           <h4>Image</h4>
           <h4>Color</h4>
           <h4>Type</h4>

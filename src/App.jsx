@@ -23,10 +23,18 @@ function App() {
           }
         />
         <Route
-          path='/myaccount'
+          path='/my-cart'
           element={
             <RequireAuth role='user'>
-              <Front show='myaccount' />
+              <Front show='my-cart' />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/orders-history'
+          element={
+            <RequireAuth role='user'>
+              <Front show='orders-history' />
             </RequireAuth>
           }
         />

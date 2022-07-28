@@ -1,9 +1,10 @@
-import Order from './Order';
 import { useContext } from 'react';
 import BackContext from '../BackContext';
+import Order from './Order';
 
 function List() {
   const { orders } = useContext(BackContext);
+  console.log('ORDERS', orders);
 
   return (
     <>
@@ -12,18 +13,21 @@ function List() {
       </div>
       {/* <Search /> */}
       <div className='flex-card'>
-        <div className='flex-row order list'>
-          <p>Order ID</p>
-          <p>Image</p>
-          <p>Type</p>
-          <p>Color Id</p>
-          <p>Size</p>
-          <p>Price</p>
-          <p>Comment</p>
-          <p>Email</p>
-          <p>Date</p>
+        <div className="container flex-row">
+          <div className='flex-row order-9 line'
+            style={{ width: '80%', marginLeft: '10px' }}
+          >
+            <h5>Order ID</h5>
+            <h5>Date</h5>
+            <h5>Cloth Ids</h5>
+            <h5>Total Sum</h5>
+            <h5>Name</h5>
+            <h5>Email</h5>
+            <h5>Comment</h5>
+          </div>
         </div>
-        {orders && orders.map((o) => <Order key={o.id} order={o} />)}
+        {orders &&
+          orders.map((order) => <Order key={order.id} order={order} />)}
       </div>
     </>
   );
