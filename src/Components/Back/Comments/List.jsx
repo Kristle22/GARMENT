@@ -3,7 +3,7 @@ import Row from './Row';
 import BackContext from '../BackContext';
 
 function List() {
-  const { some } = useContext(BackContext);
+  const { comments } = useContext(BackContext);
 
   return (
     <>
@@ -11,11 +11,13 @@ function List() {
         <h2>COMMENTS</h2>
       </div>
       <div className='flex-card'>
-        <div className='flex-row' style={{ width: '100%' }}>
-          <h4>Image</h4>
+        <div className=' com'>
+          <h2>Admin Comments:</h2>
+          {/* <h4>Image</h4>
           <h4>Type</h4>
+          <h4>Price</h4> */}
         </div>
-        {some ? some.map((r) => <Row key={r.id} row={r} />) : null}
+        {comments ? comments.map((c) => <Row key={c.id} row={c} />) : null}
       </div>
     </>
   );

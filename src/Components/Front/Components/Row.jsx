@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 import FrontContext from '../FrontContext';
+import Comment from './Comment';
+import Rating from './Rating';
 
 function Row({ row }) {
   const {
@@ -40,6 +42,10 @@ function Row({ row }) {
             <use href='#cart' />
           </svg>
         </button>
+      </div>
+      <div className="flex">
+        <Comment row={row} />
+        <Rating row={row} />
       </div>
     </>
   );

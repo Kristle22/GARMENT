@@ -33,13 +33,13 @@ function Nav() {
         >
           Orders
         </NavLink>
-        {/* <NavLink
+        <NavLink
           to='/admin/comments'
           className='nav-link'
           style={({ isActive }) => (isActive ? { color: 'crimson' } : null)}
         >
           Comments
-        </NavLink> */}
+        </NavLink>
         <Link
           to='/logout'
           className='logout'>

@@ -5,7 +5,7 @@ import Nav from './Nav';
 import ColorsCrud from './Colors/Crud';
 import GarmentCrud from './Garment/Crud';
 import OrdersCrud from './Orders/Crud';
-// import CommentsCrud from './Comments/Crud';
+import CommentsCrud from './Comments/Crud';
 import axios from 'axios';
 import { authConfig } from '../../Functions/auth';
 
@@ -22,7 +22,7 @@ function Back({ show }) {
 
   const [clothColors, setClothColors] = useState(null);
   const [createClothColor, setCreateClothColor] = useState(null);
-  // const [deleteClothColor, setDeleteClothColor] = useState(null);
+  const [deleteClothColor, setDeleteClothColor] = useState(null);
 
   const [deletePhoto, setDeletePhoto] = useState(null);
 
@@ -33,6 +33,10 @@ function Back({ show }) {
   const [sortPrice, setSortPrice] = useState('0');
   const [filter, setFilter] = useState(0);
   const [search, setSearch] = useState('');
+
+  // Optional state
+  const [comments, setComments] = useState(null);
+  // const [deleteCom, setDeleteCom] = useState(null);
 
   const sorting = (e) => {
     const sortOrder = e.target.value;
@@ -133,8 +137,26 @@ function Back({ show }) {
       });
   }, [createClothColor]);
 
+  // Delete colors
+  useEffect(() => {
+    if (null === deleteClothColor) return;
+    axios
+      .delete('http://localhost:3003/spalvos/' + deleteClothColor.id, authConfig())
+      .then((res) => {
+        showMessage(res.data.msg);
+        setLastUpdate(Date.now());
+      });
+  }, [deleteClothColor]);
+
+  // READ Comments
+  useEffect(() => {
+    axios.get('http://localhost:3003/komentarai', authConfig()).then((res) => {
+      setComments(res.data);
+    });
+  }, [lastUpdate]);
+
   // DELETE COMMENT
-  const handleDeleteComment = (id) => {
+  const handleDeleteCom = (id) => {
     axios
       .delete('http://localhost:3003/komentarai/' + id, authConfig())
       .then((res) => {
@@ -198,12 +220,13 @@ function Back({ show }) {
         clothColors,
         setClothColors,
         setCreateClothColor,
-        // setDeleteClothColor,
-        handleDeleteComment,
+        setDeleteClothColor,
         orders,
         setDeletePhoto,
         setStatus,
         setDeleteOrder,
+        handleDeleteCom,
+        comments,
       }}
     >
       {show === 'admin' ? (
@@ -227,9 +250,9 @@ function Back({ show }) {
         <GarmentCrud />
       ) : show === 'orders' ? (
         <OrdersCrud />
-      ) : // ) : show === 'comments' ? (
-        // <CommentsCrud />
-        null}
+      ) : show === 'comments' ? (
+        <CommentsCrud />
+      ) : null}
     </BackContext.Provider>
   );
 }

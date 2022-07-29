@@ -8,6 +8,7 @@ function Row({ row }) {
   const handleDelete = () => {
     setDeleteClothColor(row);
   };
+  console.log(row);
   return (
     <>
       <div className='flex-row'>

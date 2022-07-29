@@ -94,7 +94,8 @@ body {
 }
 .order-9,
 .main-5,
-.user-4 {
+.user-4,
+.com-3 {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr 3fr;
   justify-content: center;
@@ -111,6 +112,10 @@ body {
 }
 .user-4 {
   grid-template-columns: 2fr 2fr 3fr 3fr;
+  width: 80%;
+}
+.com-3 {
+  grid-template-columns: 2fr 2fr 2fr;
   width: 80%;
 }
 .user-4 p {
@@ -805,6 +810,9 @@ button.put.reg {
   padding: 10px;
   margin: 5px 0;
 }
+.com.frame {
+  width: 90%;
+}
 .line {
   border-bottom: 2px solid #8a858571;
 }
@@ -822,12 +830,24 @@ button.put.reg {
   align-items: start;
   flex-direction: column;
 }
-.comment label {
+.com h2 {
+  flex-direction: row;
+  margin: 20px;
   font-family: cursive;
-  margin: 20px 0 10px 0;
+}
+.com h3 {
+  flex-direction: row;
+  margin: 20px;
+  font-family: cursive;
+}
+
+.com label {
+  font-family: cursive;
+  margin: 0px 0 10px 0;
 }
 .feedback form .rateIt {
   display: flex;
+
   justify-items: center;
   align-items: flex-start;
   padding-left: 20px;
@@ -840,10 +860,11 @@ form .rateIt select {
   width: 60px;
   margin-left: 10px;
 }
-.feedback form h1 {
+.com form h1 {
   display: flex;
   align-items: center;
-  padding-left: 50px;
+  justify-content: center;
+  padding: 30px 90px 0 0;
   font-family: cursive;
   font-size: 50px;
   border-radius: 5px;
@@ -853,21 +874,28 @@ form .rateIt select {
 h1 b {
   padding-right: 7px;
 }
-.comment select {
+.com select {
   border-radius: 5px;
   background-color: #333;
   border: 2px solid #777;
 }
-.comment textarea {
+.com textarea {
   height: 85px;
   width: 100%;
   border-radius: 5px;
   font-size: 16px;
-  outline: 2px solid #1b8b19;
+  outline: 1px solid #1b8b19;
   resize: none;
   padding: 10px;
+  transition: outline 0.3s ease-out;
 }
-.comment button {
+.com textarea:focus-visible {
+  outline: 3px solid #72df709e;
+}
+.com textarea::placeholder {
+  font-family: cursive;
+}
+.com button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -875,18 +903,18 @@ h1 b {
   height: 50px;
   align-self: flex-end;
 }
-.comment ul {
+.com ul {
   width: 100%;
   padding: 10px 20px 10px 20px;
 }
-.comment ul li {
+.com ul li {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
   text-align: left;
   font-size: 17px;
 }
-.comment li {
+.com li {
   border: 1px solid #8a858571;
   border-radius: 5px;
   padding: 10px;
@@ -939,6 +967,9 @@ h1 b {
   .flex {
     flex-wrap: wrap;
   }
+}
+.flex-nw {
+  display: flex;
 }
 
 @media screen and (max-width: 975px) {

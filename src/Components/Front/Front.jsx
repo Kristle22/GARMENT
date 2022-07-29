@@ -19,9 +19,6 @@ function Front({ show }) {
   const [orderCreate, setOrderCreate] = useState(null);
   const [orders, setOrders] = useState(null);
 
-  const [createComment, setCreateComment] = useState(null);
-  // const [createRates, setCreateRates] = useState(null);
-
   const [users, setUsers] = useState(null);
 
   const [sortPrice, setSortPrice] = useState(0);
@@ -33,6 +30,9 @@ function Front({ show }) {
   const [offCart, setOffCart] = useState(null);
 
   const [orderClothIds, setOrderClothIds] = useState(null);
+
+  const [createCom, setCreateCom] = useState(null);
+  const [createRates, setCreateRates] = useState(null);
 
   const showMessage = (mes) => {
     setMessage(mes);
@@ -120,14 +120,14 @@ function Front({ show }) {
     if (null === orderClothIds) return;
     let lastId = { 'orderId': orders[orders.length - 1].orderId }
     console.log(lastId)
-    orderClothIds.map(garmentID => {
+    orderClothIds.map(garmentID =>
       axios
         .put('http://localhost:3003/orderAssign/' + garmentID, lastId, authConfig())
         .then((res) => {
           // showMessage(res.data.msg);
           // setLastUpdate(Date.now());
-        });
-    });
+        })
+    );
   }, [orderClothIds, orders])
 
   // Edit clothes inCart
@@ -156,34 +156,33 @@ function Front({ show }) {
 
   // CREATE Comments
   useEffect(() => {
-    if (null === createComment) return;
+    if (null === createCom) return;
     axios
       .post(
-        'http://localhost:3003/front/komentarai',
-        createComment,
+        'http://localhost:3003/komentarai',
+        createCom,
         authConfig()
       )
       .then((res) => {
         showMessage(res.data.msg);
         setLastUpdate(Date.now());
       });
-  }, [createComment]);
+  }, [createCom]);
 
-  // // CREATE RATING
-  // useEffect(() => {
-  //   if (null === createRates) return;
-  //   axios
-  //     .put(
-  //       'http://localhost:3003/front/reitingai/' + createRates.id,
-  //       createRates,
-  //       authConfig()
-  //     )
-  //     .then((res) => {
-  //       console.log('RATE', res.data);
-  //       showMessage(res.data.msg);
-  //       setLastUpdate(Date.now());
-  //     });
-  // }, [createRates]);
+  // CREATE RATING
+  useEffect(() => {
+    if (null === createRates) return;
+    axios
+      .put(
+        'http://localhost:3003/reitingai/' + createRates.id,
+        createRates,
+        authConfig()
+      )
+      .then((res) => {
+        showMessage(res.data.msg);
+        setLastUpdate(Date.now());
+      });
+  }, [createRates]);
 
   function getUser() {
     return localStorage.getItem('username');
@@ -203,8 +202,6 @@ function Front({ show }) {
         orderModal,
         setOrderModal,
         message,
-        setCreateComment,
-        // setCreateRates,
         orders,
         showMessage,
         setFilter,
@@ -219,7 +216,8 @@ function Front({ show }) {
         setOffCart,
         offCart,
         setOrders,
-
+        setCreateCom,
+        setCreateRates,
       }}
     >
       {show === 'my-cart' ? (
