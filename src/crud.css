@@ -631,7 +631,13 @@ fieldset {
   height: fit-content;
   max-width: 400px;
 }
-
+input.color {
+  width: 50%;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  border-bottom: none;
+}
 /* FRONT */
 .flex-card.front {
   background: linear-gradient(rgba(21, 22, 22, 0.855), rgba(20, 21, 20, 0.888)),

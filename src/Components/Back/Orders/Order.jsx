@@ -5,6 +5,7 @@ function Order({ order }) {
   const { setDeleteOrder, setStatus } = useContext(BackContext);
 
   const orderId = order.orderId;
+
   const handleConfirm = () => {
     setStatus({ id: orderId });
   };

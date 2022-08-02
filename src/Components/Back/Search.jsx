@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import BackContext from './BackContext';
 
 function Search() {
-  const { setSearch, search } = useContext(BackContext);
+  const { setSearch } = useContext(BackContext);
 
   const [s, setS] = useState('');
 
