@@ -26,7 +26,7 @@ function Row({ row }) {
           <h2>Comments({row.com_count})</h2>
           <ul>
             {
-              row.coms && row.coms.slice(0, -3).split('^-^,').map((c, i) => <li key={i}>{c}
+              row.coms && row.coms.slice(0, -5).split('-^-^-,').map((c, i) => <li key={i}>{c}
                 <button
                   type='button'
                   className='dlt'
